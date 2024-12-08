@@ -21,7 +21,7 @@ df = df.sort_values(by='forecasted_solar_penetration')
 # Parameters for sliding window
 window_size = 10000
 step_size = 1000
-n_iterations = 1  # Number of bootstraps
+n_iterations = 100  # Number of bootstraps
 
 # Store CATE and corresponding penetration levels for each window
 results = []
@@ -41,7 +41,7 @@ for start in range(0, len(df) - window_size + 1, step_size):
         # Bootstrap for the current window
         for _ in range(n_iterations):
             random_subset = window_data.sample(n=min(len(window_data), window_size), replace=True)
-            df_residualized = residualize_data(random_subset, y='Within Day Price (MIDP)')
+            df_residualized = residualize_data(random_subset, y='Day-Ahead Nordpool Price')
             res = fit_residualized_model(df_residualized)
 
             # Append the mean solar penetration and CATE to results
@@ -55,8 +55,8 @@ for start in range(0, len(df) - window_size + 1, step_size):
 results_df = pd.DataFrame(results)
 
 # Save raw results
-results_df.to_csv('/Users/dcac/PycharmProjects/day-ahead-wind-forecast/causal_analysis_wind_solar/plots/results_solar_withinday.csv', index=False)
-results_dataset = pd.read_csv('/Users/dcac/PycharmProjects/day-ahead-wind-forecast/causal_analysis_wind_solar/plots/results_solar_withinday.csv')
+results_df.to_csv('/Users/dcac/PycharmProjects/day-ahead-wind-forecast/causal_analysis_wind_solar/plots/results_solar_nordpool.csv', index=False)
+results_dataset = pd.read_csv('/Users/dcac/PycharmProjects/day-ahead-wind-forecast/causal_analysis_wind_solar/plots/results_solar_nordpool.csv')
 
 # Group by mean solar penetration and calculate mean and quantiles for CATE
 mean_cate_df = results_dataset.groupby('mean_solar_penetration')['cate'].agg(['mean']).reset_index()
@@ -84,7 +84,7 @@ plt.xticks(fontsize=14)
 plt.yticks(fontsize=14)
 plt.legend(fontsize=14)
 plt.tight_layout()
-plt.xlim(-12.6, 0)
+# plt.xlim(-12.6, 0)
 plt.show()
 
 plt.figure(figsize=(6, 6), dpi=300)

@@ -12,7 +12,7 @@ df['Date'] = pd.to_datetime(df['Date'])
 df.set_index('Date', inplace=True)
 
 # Extract necessary columns
-df = df[['forecasted_wind_penetration', 'Within Day Price (MIDP)']]
+df = df[['forecasted_wind_penetration', 'Day-Ahead Nordpool Price']]
 
 # Sort the dataset by penetration for smoother sliding window
 df = df.sort_values('forecasted_wind_penetration')
@@ -42,7 +42,7 @@ for i in range(0, len(df) - window_size + 1, step_size):
 
     # Extract the data for bootstrap
     penetration_data = window['forecasted_wind_penetration'].values
-    price_data = window['Within Day Price (MIDP)'].values
+    price_data = window['Day-Ahead Nordpool Price'].values
 
     # Perform bootstrap for solar penetration and price
     penetration_ci_low, penetration_ci_high, penetration_mean = apply_bootstrap(penetration_data)
@@ -55,7 +55,7 @@ for i in range(0, len(df) - window_size + 1, step_size):
     ci_upper.append(price_ci_high)
 
 # Load solar results
-results_dataset_solar = pd.read_csv('/Users/dcac/PycharmProjects/day-ahead-wind-forecast/causal_analysis_wind_solar/plots/results_wind_withinday.csv')
+results_dataset_solar = pd.read_csv('/Users/dcac/PycharmProjects/day-ahead-wind-forecast/causal_analysis_wind_solar/plots/results_wind_nordpool.csv')
 
 # Group by mean solar penetration and calculate mean and quantiles for CATE
 mean_cate_df_wind = results_dataset_solar.groupby('mean_wind_penetration')['cate'].agg(['mean']).reset_index()
@@ -97,5 +97,5 @@ ax2.set_xlabel('Price [GBP/MWh]', color='gray', fontsize=18)
 ax2.tick_params(axis='x', labelcolor='gray')
 fig.legend(fontsize=16, ncol=1, bbox_to_anchor=(0.48, 0.6), frameon=True)
 plt.tight_layout()
-plt.savefig('/Users/dcac/PycharmProjects/day-ahead-wind-forecast/causal_analysis_wind_solar/plots/mean_vs_cate_wind_withinday.png', format='png', dpi=300)
+plt.savefig('/Users/dcac/PycharmProjects/day-ahead-wind-forecast/causal_analysis_wind_solar/plots/mean_vs_cate_wind_nordpool.png', format='png', dpi=300)
 plt.show()
