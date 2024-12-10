@@ -65,4 +65,3 @@ def fit_residualized_model(data):
     scale_residualized = pipeline_residualized.named_steps['scaler'].scale_
 
     return coef_residualized / scale_residualized
-

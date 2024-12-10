@@ -3,7 +3,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from tqdm import tqdm
 from scipy.ndimage import gaussian_filter1d
-from double_machine_learning.DML_utils_wind import residualize_data, fit_residualized_model
+from double_machine_learning.DML_utils_solar import residualize_data, fit_residualized_model
 
 # Load data
 df = pd.read_csv('/Users/dcac/Data/NESO/day_ahead_wind_portal_preprocessed_v2.csv')
@@ -21,7 +21,7 @@ df = df.sort_values(by='forecasted_solar_penetration')
 # Parameters for sliding window
 window_size = 10000
 step_size = 1000
-n_iterations = 100  # Number of bootstraps
+n_iterations = 1  # Number of bootstraps
 
 # Store CATE and corresponding penetration levels for each window
 results = []
