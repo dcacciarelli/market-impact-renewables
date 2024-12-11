@@ -55,7 +55,7 @@ for i in range(0, len(df) - window_size + 1, step_size):
     ci_upper.append(price_ci_high)
 
 # Load solar results
-results_dataset_solar = pd.read_csv('/Users/dcac/PycharmProjects/day-ahead-wind-forecast/causal_analysis_wind_solar/plots/results_solar_withinday.csv')
+results_dataset_solar = pd.read_csv('/Users/dcac/PycharmProjects/day-ahead-wind-forecast/causal_analysis_wind_solar/results/results_solar_nordpool.csv')
 
 # Group by mean solar penetration and calculate mean and quantiles for CATE
 mean_cate_df_solar = results_dataset_solar.groupby('mean_solar_penetration')['cate'].agg(['mean']).reset_index()
@@ -79,25 +79,25 @@ plt.rcParams.update({
 })
 
 # Create a plot with shared y-axis for penetration
-fig, ax1 = plt.subplots(figsize=(8, 8), dpi=300)
+fig, ax1 = plt.subplots(figsize=(6, 6), dpi=300)
 ax1.plot(mean_cate_df_solar['smoothed_mean'], mean_cate_df_solar['mean_solar_penetration'],
          color='orange', label='Causal estimate', lw=4)
 ax1.fill_betweenx(mean_cate_df_solar['mean_solar_penetration'],
                   mean_cate_df_solar['smoothed_lower_ci'],
                   mean_cate_df_solar['smoothed_upper_ci'],
                   color='papayawhip', alpha=1)  # Orange fill
-ax1.set_xlabel('CATE [GBP/MWh]', color='orange', fontsize=18)
-ax1.set_ylabel('Forecasted penetration [%]', fontsize=18)
-ax1.tick_params(axis='x', labelcolor='orange')
+ax1.set_xlabel('CATE [GBP/MWh]', color='orange', fontsize=16, labelpad=10)
+ax1.set_ylabel('Forecasted penetration [%]', fontsize=16, labelpad=10)
+ax1.tick_params(axis='x', labelcolor='orange', labelsize=14)
 ax1.grid(axis='y', linestyle='--', alpha=0.4)
 ax2 = ax1.twiny()  # Create a secondary x-axis sharing the same y-axis
 ax2.plot(mean_prices, mean_penetrations, color='k', label='Observational mean', lw=1, alpha=.5, ls='--')
 ax2.fill_betweenx(mean_penetrations, ci_lower, ci_upper, color='gray', alpha=0.1)  # Crimson fill
-ax2.set_xlabel('Price [GBP/MWh]', color='gray', fontsize=18)
-ax2.tick_params(axis='x', labelcolor='gray')
-fig.legend(fontsize=16, ncol=1, bbox_to_anchor=(0.8, 0.9), frameon=True)
+ax2.set_xlabel('Price [GBP/MWh]', color='gray', fontsize=16, labelpad=10)
+ax2.tick_params(axis='x', labelcolor='gray', labelsize=14)
+fig.legend(fontsize=14, ncol=1, bbox_to_anchor=(0.83, 0.88), frameon=True)
 plt.tight_layout()
 # Save the plot
-plt.savefig('/Users/dcac/PycharmProjects/day-ahead-wind-forecast/causal_analysis_wind_solar/plots/mean_vs_cate_solar_withinday.png', format='png', dpi=300)
+plt.savefig('/Users/dcac/PycharmProjects/day-ahead-wind-forecast/causal_analysis_wind_solar/plots/mean_vs_cate_solar_nordpool.png', format='png', dpi=600)
 plt.show()
 
