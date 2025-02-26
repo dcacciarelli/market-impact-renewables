@@ -50,10 +50,10 @@ pip install numpy pandas matplotlib tqdm lightgbm scikit-learn scipy
 
 ## Visualizations
 ### Causal Effect of Solar Penetration on Prices
-![Solar Impact](mean_vs_cate_solar.png)
+<img src='mean_vs_cate_solar.png' width='500'/>
 
 ### Causal Effect of Wind Penetration on Prices
-![Wind Impact](mean_vs_cate_wind.png)
+<img src='mean_vs_cate_wind.png' width='500'/>
 
 ## Contact
 For questions or collaborations, reach out to **d.cacciarelli@gmail.com** or connect on [LinkedIn](https://www.linkedin.com/in/cacciarelli/).
