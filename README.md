@@ -12,12 +12,12 @@ This repository contains the code and data analysis related to the paper [**"Do 
 ```
 📂 market-impact-renewables
 │── 📄 README.md        # This file
-│── 📄 manuscript.pdf   # Paper explaining methodology and findings
+│── 📄 iEnergy.pdf      # Paper explaining methodology and findings
 │── 📂 code
 │   ├── DML_overall_solar.py   # Main analysis script for solar penetration
 │   ├── DML_overall_wind.py    # Main analysis script for wind penetration
-│   ├── DML_utils_solar.py    # Utility functions for solar analysis
-│   ├── DML_utils_wind.py     # Utility functions for wind analysis
+│   ├── DML_utils_solar.py     # Utility functions for solar analysis
+│   ├── DML_utils_wind.py      # Utility functions for wind analysis
 │   ├── dml_vs_mean_plot_solar.py  # Plot CATE vs mean prices for solar
 │   ├── dml_vs_mean_plot_wind.py   # Plot CATE vs mean prices for wind
 │── 📂 data
