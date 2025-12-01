@@ -1,4 +1,4 @@
-# Double Machine Learning for Electricity Prices
+# Double Machine Learning for Energy Analytics
 
 ## Overview
 This repository contains the code and data analysis related to the paper [**"Do we actually understand the impact of renewables on electricity prices? A causal inference approach"**](https://ieeexplore.ieee.org/document/11231232). The study investigates the causal effect of wind and solar penetration on electricity market prices using **Double Machine Learning (DML)** techniques.
